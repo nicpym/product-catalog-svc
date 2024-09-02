@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-catalog-svc
+spec:
+  selector:
+    matchLabels:
+      app: product-catalog-svc
+  template:
+    metadata:
+      labels:
+        app: product-catalog-svc
+    spec:
+      containers:
+      - name: product-catalog-svc
+        image: to-be-replaced:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"

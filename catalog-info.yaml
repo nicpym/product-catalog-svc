@@ -1,0 +1,39 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: product-catalog-svc
+  description: Product Catalog Service
+  annotations:
+    backstage.io/kubernetes-id: product-catalog-svc
+    backstage.io/kubernetes-namespace: workloads
+    backstage.io/kubernetes-cluster: team-a-cluster
+    github.com/project-slug: nicpym/product-catalog-svc
+    argocd/app-name: product-catalog-svc
+    argocd/app-namespace: team-a-cluster
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - python
+    - fastapi
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/team-a
+  system: connect-demo
+  dependsOn:
+    - resource:default/team-a-cluster
+  providesApis:
+    - product-catalog-svc
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: product-catalog-svc
+  description: Product Catalog Service
+  tags:
+    - rest
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: group:default/team-a
+  definition:
+    $text: ./openapi.yaml

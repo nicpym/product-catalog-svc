@@ -1,0 +1,7 @@
+site_name: 'product-catalog-svc-docs'
+site_description: Product Catalog Service
+nav:
+  - Overview: index.md
+
+plugins:
+  - techdocs-core
