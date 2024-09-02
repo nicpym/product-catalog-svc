@@ -16,8 +16,8 @@ paths:
               schema: {}
   /api/products/{product_id}:
     get:
-      summary: Geet Product
-      operationId: geet_product_api_products__product_id__get
+      summary: Get Product
+      operationId: get_product_api_products__product_id__get
       parameters:
       - name: product_id
         in: path
