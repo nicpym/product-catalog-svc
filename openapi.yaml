@@ -23,11 +23,176 @@ paths:
           description: Successful Response
           content:
             application/json:
-              schema: {}
+              schema:
+                items:
+                  $ref: '#/components/schemas/Product'
+                type: array
+                title: Response List Products Api Products Get
+    post:
+      summary: Create Product
+      operationId: create_product_api_products_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /api/products/{product_id}:
     get:
       summary: Get Product
       operationId: get_product_api_products__product_id__get
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Product Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Update Product
+      operationId: update_product_api_products__product_id__put
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Product Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      summary: Delete Product
+      operationId: delete_product_api_products__product_id__delete
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Product Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/products/search:
+    get:
+      summary: Search Products
+      operationId: search_products_api_products_search_get
+      parameters:
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+      - name: category
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Category
+      - name: min_price
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Min Price
+      - name: max_price
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Price
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+                title: Response Search Products Api Products Search Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/products/categories:
+    get:
+      summary: Get Categories
+      operationId: get_categories_api_products_categories_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+                title: Response Get Categories Api Products Categories Get
+  /api/products/{product_id}/specifications:
+    get:
+      summary: Get Product Specifications
+      operationId: get_product_specifications_api_products__product_id__specifications_get
       parameters:
       - name: product_id
         in: path
@@ -47,6 +212,96 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Update Product Specifications
+      operationId: update_product_specifications_api_products__product_id__specifications_put
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Product Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpecificationsUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/products/{product_id}/images:
+    post:
+      summary: Add Product Images
+      operationId: add_product_images_api_products__product_id__images_post
+      parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Product Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+              title: Images
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/products/availability/{availability_status}:
+    get:
+      summary: Get Products By Availability
+      operationId: get_products_by_availability_api_products_availability__availability_status__get
+      parameters:
+      - name: availability_status
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Availability Status
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+                title: Response Get Products By Availability Api Products Availability  Availability
+                  Status  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
     HTTPValidationError:
@@ -58,6 +313,106 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    Product:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        price:
+          type: number
+          title: Price
+        category:
+          type: string
+          title: Category
+        availability:
+          type: string
+          title: Availability
+        id:
+          type: integer
+          title: Id
+        specifications:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Specifications
+        images:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Images
+      type: object
+      required:
+      - name
+      - description
+      - price
+      - category
+      - availability
+      - id
+      title: Product
+    ProductCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        price:
+          type: number
+          title: Price
+        category:
+          type: string
+          title: Category
+        availability:
+          type: string
+          title: Availability
+      type: object
+      required:
+      - name
+      - description
+      - price
+      - category
+      - availability
+      title: ProductCreate
+    ProductUpdate:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        price:
+          type: number
+          title: Price
+        category:
+          type: string
+          title: Category
+        availability:
+          type: string
+          title: Availability
+      type: object
+      required:
+      - name
+      - description
+      - price
+      - category
+      - availability
+      title: ProductUpdate
+    SpecificationsUpdate:
+      properties:
+        specifications:
+          type: object
+          title: Specifications
+      type: object
+      required:
+      - specifications
+      title: SpecificationsUpdate
     ValidationError:
       properties:
         loc:
