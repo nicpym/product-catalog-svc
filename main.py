@@ -31,7 +31,7 @@ def list_products():
     return products
 
 @app.get("/api/products/{product_id}")
-def geet_product(product_id: int):
+def get_product(product_id: int):
     return {
         "id": product_id,
         "name": "Wireless Headphones",
