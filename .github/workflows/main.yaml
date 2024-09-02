@@ -89,7 +89,7 @@ jobs:
           updateFile: true
       - name: Commit files
         run: |
-          git config core.sharedRepository
+          chmod -R u+rw .git/
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -a -m "${{steps.version.outputs.new_tag}} Release"
