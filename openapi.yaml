@@ -69,3 +69,5 @@ components:
       - msg
       - type
       title: ValidationError
+servers:
+- url: http://product-catalog-svc.team-a-cluster.localhost
