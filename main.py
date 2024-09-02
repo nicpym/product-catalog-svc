@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from datetime import datetime
 
 app = FastAPI(title="product-catalog-svc", description="Product Catalog Service", version="0.1.0")
 
@@ -14,6 +16,10 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allows all headers
 )
+
+@app.get("/health")
+async def health_check():
+    return JSONResponse(content={"status": "healthy", "timestamp": datetime.utcnow().isoformat()})
 
 @app.get("/api/products")
 def list_products():
