@@ -21,6 +21,7 @@ spec:
   system: connect-demo
   dependsOn:
     - resource:default/team-a-cluster
+    - resource:default/product-catalog-assets-connect
   providesApis:
     - product-catalog-svc
 ---
