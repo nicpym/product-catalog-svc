@@ -4,10 +4,10 @@ info:
   description: Product Catalog Service
   version: 0.1.0
 paths:
-  /:
+  /api/products:
     get:
-      summary: Read Root
-      operationId: read_root__get
+      summary: List Products
+      operationId: list_products_api_products_get
       responses:
         '200':
           description: Successful Response
