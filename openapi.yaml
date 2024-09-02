@@ -14,23 +14,17 @@ paths:
           content:
             application/json:
               schema: {}
-  /items/{item_id}:
+  /api/products/{product_id}:
     get:
-      summary: Read Item
-      operationId: read_item_items__item_id__get
+      summary: Geet Product
+      operationId: geet_product_api_products__product_id__get
       parameters:
-      - name: item_id
+      - name: product_id
         in: path
         required: true
         schema:
           type: integer
-          title: Item Id
-      - name: q
-        in: query
-        required: false
-        schema:
-          type: string
-          title: Q
+          title: Product Id
       responses:
         '200':
           description: Successful Response
