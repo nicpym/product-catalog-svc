@@ -24,6 +24,10 @@ spec:
     - resource:default/product-catalog-assets-connect
   providesApis:
     - product-catalog-svc
+  links:
+    - url: http://product-catalog-svc.team-a-cluster.localhost/docs
+      title: Swagger Docs
+      icon: web
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API

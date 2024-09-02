@@ -17,6 +17,22 @@ def list_products():
     ]
     return products
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/api/products/{product_id}")
+def geet_product(product_id: int):
+    return {
+        "id": product_id,
+        "name": "Wireless Headphones",
+        "description": "High-quality wireless headphones with noise-canceling feature.",
+        "price": 99.99,
+        "category": "Electronics",
+        "availability": "In Stock",
+        "specifications": {
+            "battery_life": "20 hours",
+            "color": "Black",
+            "weight": "250g"
+        },
+        "images": [
+            "image1.jpg",
+            "image2.jpg"
+        ]
+    }
