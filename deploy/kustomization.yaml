@@ -9,6 +9,6 @@ commonLabels:
   app: product-catalog-svc
   backstage.io/kubernetes-id: product-catalog-svc
 images:
-- name: to-be-replaced
-  newName: ealen/echo-server
-  newTag: latest
+  - name: to-be-replaced
+    newName: ghcr.io/nicpym/product-catalog-svc
+    newTag: v0.0.1
