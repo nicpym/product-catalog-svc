@@ -19,6 +19,7 @@ if __name__ == "__main__":
     print(f"importing app from {args.app}")
     app = import_from_string(args.app)
     openapi = app.openapi()
+    openapi['servers'] = [{"url": 'http://product-catalog-svc.team-a-cluster.localhost'}]
     version = openapi.get("openapi", "unknown version")
 
     print(f"writing openapi spec v{version}")
